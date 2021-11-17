@@ -15,28 +15,8 @@ input logic    d,
 output logic   q
 );
 
-//`include "ff_macro.def"
+`include "ff_macro.def"
 
-`define ff_async(clk, myedge="negedge", rst, en, d, q)\
-generate case(``myedge) \
-   "posedge": begin\
-      always_ff@(posedge ``clk or posedge ``rst) begin\
-      if (``rst)\
-         ``q<= '0;\
-      else if(``en)\
-         ``q<=``d;\
-      end\
-   end\
-   "negedge": begin\
-      always_ff@(posedge ``clk, negedge ``rst) begin\
-         if (!``rst_n)\
-            ``q <= '0;\
-         else if(enb)\
-            ``q <= ``d;\
-      end\
-   end\
-endcase endgenerate
-
-`ff_async(cclk, "negedge", rst_n, enb, d, q);
+`FF_D(cclk, "negedge", rst_n, enb, d, q);
 
 endmodule
