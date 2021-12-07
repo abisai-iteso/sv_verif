@@ -23,7 +23,7 @@ mdr_wrapper uut(
 
 initial begin
                 t   = new(itf);
-               t.init();
+                t.init();
                 clk = 'd0; 
                 rst = 'd1; 
   #(2*PERIOD)   
